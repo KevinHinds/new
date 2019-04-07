@@ -4,15 +4,14 @@ Name: Kevin Hinds
 Date started: 29/03/2019
 GitHub URL:
 """
-from typing import List
+
 
 MENU = """L - List places
 A - Add new place
 M - Mark a place as visited
 Q - Quit"""
 
-out_file = open("temp.csv", "a")
-in_file = open("temp.csv")
+in_file = open("temp.csv", 'r')
 
 def main():
     text = in_file.readlines()
@@ -21,7 +20,11 @@ def main():
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            print(text)
+            for place in text:
+                destinations = place.strip().split(',')
+                print(destinations)
+                # print("{}. {} in {} priority {}".format(text[:',0], text[1]), text[2])
+
         elif choice == "A":
             new_place = input("Name: ")
             while new_place == "":
@@ -53,6 +56,8 @@ def main():
     print("Have a nice day :)")
 
 
-out_file.close()
+
+
+
 
 main()
