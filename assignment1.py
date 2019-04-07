@@ -4,29 +4,55 @@ Name: Kevin Hinds
 Date started: 29/03/2019
 GitHub URL:
 """
-menu = """L - List places
-   A - Add new place
-   M - Mark a place as visited
-   Q - Quit"""
+from typing import List
 
+MENU = """L - List places
+A - Add new place
+M - Mark a place as visited
+Q - Quit"""
+
+out_file = open("temp.csv", "a")
+in_file = open("temp.csv")
 
 def main():
+    text = in_file.readlines()
     print("Travel Tracker 1.0 - by Kevin Hinds")
-    print(menu)
+    print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            print("list")
+            print(text)
         elif choice == "A":
-            print("add")
+            new_place = input("Name: ")
+            while new_place == "":
+                print("Input can not be blank")
+                new_place = input("Name: ")
+            new_country = input("Country: ")
+            while new_country == "":
+                print("Input can not be blank")
+                new_country = input("Name: ")
+            finished = False
+            while not finished:
+                try:
+                    new_priority = int(input("Enter a valid integer: "))
+                    finished = True
+                except ValueError:
+                    print("Please enter a valid integer.")
+            while new_priority <= 0:
+                print("Number must be > 0")
+                new_priority = int(input("Priority: "))
+            print("{} in {} (priority {}) added to Travel Tracker".format(new_place, new_country, new_priority))
+
         elif choice == "M":
             print("mark")
         else:
             print("Invalid menu choice")
-        print(menu)
+        print(MENU)
         choice = input(">>> ").upper()
-# print("{} places saved to places.csv".format(total_number_places_visited) )
+    # print("{} places saved to places.csv".format(total_number_places_visited) )
     print("Have a nice day :)")
 
+
+out_file.close()
 
 main()
