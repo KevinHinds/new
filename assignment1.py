@@ -61,8 +61,4 @@ def main():
     print("Have a nice day :)")
 
 
-
-
-
-
 main()
