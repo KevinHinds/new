@@ -13,18 +13,20 @@ Q - Quit"""
 
 in_file = open("temp.csv", 'r')
 
+
 def main():
-    text = in_file.readlines()
+    places = in_file.readlines()
     print("Travel Tracker 1.0 - by Kevin Hinds")
+    count = 0
+    for i in places:
+        count += 1
+    print("{} places loaded from places.csv".format(count))
     print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            for place in text:
-                destinations = place.strip().split(',')
-                print(destinations)
-                # print("{}. {} in {} priority {}".format(text[:',0], text[1]), text[2])
-
+            for place in places:
+                print(place)
         elif choice == "A":
             new_place = input("Name: ")
             while new_place == "":
@@ -37,7 +39,7 @@ def main():
             finished = False
             while not finished:
                 try:
-                    new_priority = int(input("Enter a valid integer: "))
+                    new_priority = int(input("Priority: "))
                     finished = True
                 except ValueError:
                     print("Please enter a valid integer.")
@@ -45,7 +47,10 @@ def main():
                 print("Number must be > 0")
                 new_priority = int(input("Priority: "))
             print("{} in {} (priority {}) added to Travel Tracker".format(new_place, new_country, new_priority))
-
+            new_entry = [new_place, new_country, new_priority, "n"]
+            print(new_entry)
+            places.extend(new_entry)
+            print(places)
         elif choice == "M":
             print("mark")
         else:
